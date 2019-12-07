@@ -10,31 +10,30 @@ import (
 )
 
 const (
-	NAME = "FpgaMemoryFileGenerator"
-	MAJOR_VERSION_NUMBER = 0
-	MINOR_VERSION_NUMBER = 1
-	REVISION_VERSION_NUMBER = 0
+	AppName               = "FpgaMemoryFileGenerator"
+	MajorVersionNumber    = 0
+	MinorVersionNumber    = 1
+	RevisionVersionNumber = 0
 )
 
 var (
 	//timeStr = time.Now().Format("2006-01-02 15:04:05")
-	BUILD_TIME = time.Now().Format("2006-01-02 15:04:05")
+	BuildTime = time.Now().Format("2006-01-02 15:04:05")
 )
 
 func main() {
 	log.Println("ok")
 
-	version := fmt.Sprintf("%d.%d.%d Build %s", MAJOR_VERSION_NUMBER, MINOR_VERSION_NUMBER, REVISION_VERSION_NUMBER, BUILD_TIME)
+	version := fmt.Sprintf("%d.%d.%d Build %s", MajorVersionNumber, MinorVersionNumber, RevisionVersionNumber, BuildTime)
 
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("all2mif version all2mif%s", c.App.Version)
 	}
 
 	app := &cli.App{
-		Name: NAME,
+		Name:    AppName,
 		Version: version,
 	}
 	app.Run(os.Args)
-
 
 }
