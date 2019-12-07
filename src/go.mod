@@ -1,4 +1,4 @@
-module FpgaMemoryFileGenerator
+module github.com/cw1997/FpgaMemoryFileGenerator
 
 go 1.13
 
