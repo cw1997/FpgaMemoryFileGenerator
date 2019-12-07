@@ -1,3 +1,8 @@
+// project : FpgaMemoryFileGenerator
+// author : cw1997 [www.changwei.me]
+// datetime : 2019/12/8 6:07
+// repo : https://github.com/cw1997/FpgaMemoryFileGenerator
+
 package main
 
 import (
