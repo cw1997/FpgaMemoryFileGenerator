@@ -5,13 +5,6 @@
 
 package generator
 
-type Format int
-
-const (
-	FORMAT_MIF format = iota
-	FORMAT_COE
-)
-
 type Generator interface {
 	Generate(data []byte) string
 }
