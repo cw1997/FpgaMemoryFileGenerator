@@ -36,8 +36,8 @@ func main() {
 	}
 
 	app := &cli.App{
-		Name:    AppName,
-		Version: version,
+		Name:     AppName,
+		Version:  version,
 		Compiled: time.Now(),
 		Authors: []*cli.Author{
 			&cli.Author{
@@ -48,65 +48,64 @@ func main() {
 		Copyright: "(c) 2019 cw1997.",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Name:    "output-type",
-				Usage:   "Type of output file",
-				Aliases: []string{"ot"},
-				Value:   "mif",
+				Name:        "output-type",
+				Usage:       "Type of output file",
+				Aliases:     []string{"ot"},
+				Value:       "mif",
 				DefaultText: "mif",
 			},
 			&cli.StringFlag{
-				Name:    "output-path",
-				Usage:   "Output full path and file name",
-				Aliases: []string{"op"},
-				Value:   "./output",
+				Name:        "output-path",
+				Usage:       "Output full path and file name",
+				Aliases:     []string{"op"},
+				Value:       "./output",
 				DefaultText: "current path, filename: ./output",
 			},
 
 			&cli.StringFlag{
-				Name:    "radix-address",
-				Usage:   "Radix of address (Only be used for mif format)",
-				Aliases: []string{"ra"},
-				Value:   "16",
+				Name:        "radix-address",
+				Usage:       "Radix of address (Only be used for mif format)",
+				Aliases:     []string{"ra"},
+				Value:       "16",
 				DefaultText: "16 hex",
 			},
 			&cli.StringFlag{
-				Name:    "depth",
-				Usage:   "Depth of memory (Only be used for mif format)",
-				Aliases: []string{"d"},
-				Value:   "16",
+				Name:        "depth",
+				Usage:       "Depth of memory (Only be used for mif format)",
+				Aliases:     []string{"d"},
+				Value:       "16",
 				DefaultText: "16",
 			},
 
 			&cli.StringFlag{
-				Name:    "width",
-				Usage:   "Bit width of memory (Only be used for mif format)",
-				Aliases: []string{"w"},
-				Value:   "16",
+				Name:        "width",
+				Usage:       "Bit width of memory (Only be used for mif format)",
+				Aliases:     []string{"w"},
+				Value:       "16",
 				DefaultText: "16",
 			},
 			&cli.StringFlag{
-				Name:    "radix-data",
-				Usage:   "Radix of input data",
-				Aliases: []string{"rd"},
-				Value:   "Radix of data",
+				Name:        "radix-data",
+				Usage:       "Radix of input data",
+				Aliases:     []string{"rd"},
+				Value:       "Radix of data",
 				DefaultText: "16 hex",
 			},
 
 			&cli.StringFlag{
-				Name:    "data-source",
-				Usage:   "Input data source",
-				Aliases: []string{"ds"},
-				Value:   "./input",
+				Name:        "data-source",
+				Usage:       "Input data source",
+				Aliases:     []string{"ds"},
+				Value:       "./input",
 				DefaultText: "current path, filename: ./input",
 			},
 			&cli.StringFlag{
-				Name:    "data-type",
-				Usage:   "Type of input file",
-				Aliases: []string{"dt"},
-				Value:   "ascii",
+				Name:        "data-type",
+				Usage:       "Type of input file",
+				Aliases:     []string{"dt"},
+				Value:       "ascii",
 				DefaultText: "ascii",
 			},
-
 		},
 		Action: func(ctx *cli.Context) error {
 			//if !ctx.Bool("ginger-crouton") {
@@ -116,7 +115,6 @@ func main() {
 			log.Println(ctx.String("output-path"))
 			return nil
 		},
-
 	}
 
 	err := app.Run(os.Args)
