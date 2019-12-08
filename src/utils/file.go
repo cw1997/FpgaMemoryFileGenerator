@@ -16,3 +16,8 @@ func ReadBytesFromFile(path string) ([]byte, error) {
 	b, err := ioutil.ReadFile(path)
 	return b, err
 }
+
+func ReadStringFromFile(path string) (string, error) {
+	b, err := ioutil.ReadFile(path)
+	return string(b), err
+}
