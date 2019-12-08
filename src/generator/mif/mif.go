@@ -35,10 +35,10 @@ func (m Format) Generate(data []byte) string {
 
 	dataRadixNum := radix.ConvertRadixStrToNum(m.dataRadix)
 	dataRadixFormatPlaceholder := radix.ConvertRadixStrToPlaceholder(m.dataRadix)
-	dataLength := strconv.Itoa(m.width / dataRadixNum + 1)
+	dataWidth := strconv.Itoa(m.width / dataRadixNum + 1)
 
 	// example: %s%08x:%08x\n
-	contentFormat := "%s%0" + addressLength + addressRadixFormatPlaceholder + ":%0" + dataLength + dataRadixFormatPlaceholder + "\n"
+	contentFormat := "%s%0" + addressLength + addressRadixFormatPlaceholder + ":%0" + dataWidth + dataRadixFormatPlaceholder + "\n"
 
 
 
