@@ -3,7 +3,7 @@
 // datetime : 2019/12/8 21:07
 // repo : https://github.com/cw1997/FpgaMemoryFileGenerator
 
-package io
+package utils
 
 import "io/ioutil"
 
