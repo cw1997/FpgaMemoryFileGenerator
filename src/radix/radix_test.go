@@ -9,7 +9,7 @@ import "testing"
 
 func TestCheckRadix(t *testing.T) {
 	var testCases = []struct {
-		in       int // input
+		in       int  // input
 		expected bool // expected result
 	}{
 		{16, true},
@@ -31,7 +31,7 @@ func TestCheckRadix(t *testing.T) {
 
 func TestConvertRadixStrToPlaceholder(t *testing.T) {
 	var testCases = []struct {
-		in       int // input
+		in       int    // input
 		expected string // expected result
 	}{
 		{16, "x"},
@@ -50,7 +50,7 @@ func TestConvertRadixStrToPlaceholder(t *testing.T) {
 
 func TestConvertRadixNumToStr(t *testing.T) {
 	var testCases = []struct {
-		in       int // input
+		in       int    // input
 		expected string // expected result
 	}{
 		{16, "HEX"},

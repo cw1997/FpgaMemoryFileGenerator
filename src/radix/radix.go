@@ -22,7 +22,6 @@ const (
 	BinFormatPlaceholder = "b"
 )
 
-
 func CheckRadix(intRadix int) bool {
 	if intRadix == Hex || intRadix == Dec || intRadix == Oct || intRadix == Bin {
 		return true
