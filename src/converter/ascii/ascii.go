@@ -5,7 +5,6 @@
 
 package ascii
 
-
 func Converter(str string) []byte {
 	return []byte(str)
 }
