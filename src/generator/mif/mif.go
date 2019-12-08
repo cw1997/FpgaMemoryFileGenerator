@@ -42,7 +42,7 @@ func (m Format) Generate(data []byte) string {
 	dataWidth := strconv.Itoa(m.width/dataRadixNum + 1)
 
 	// example: %s%08x:%08x\n
-	contentFormat := "%s%0" + addressLength + addressRadixFormatPlaceholder + ":%0" + dataWidth + dataRadixFormatPlaceholder + "\n"
+	contentFormat := "%s%0" + addressLength + addressRadixFormatPlaceholder + ":%0" + dataWidth + dataRadixFormatPlaceholder + ";\n"
 
 	for i := 0; i < m.depth; i++ {
 		if i >= len(data) {

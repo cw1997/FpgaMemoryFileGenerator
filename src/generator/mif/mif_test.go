@@ -50,14 +50,14 @@ ADDRESS_RADIX = HEX;
 DATA_RADIX = HEX;
 CONTENT
 BEGIN
-0:1
-1:2
-2:3
-3:4
-4:0
-5:0
-6:0
-7:0
+0:1;
+1:2;
+2:3;
+3:4;
+4:0;
+5:0;
+6:0;
+7:0;
 END;
 `
 
