@@ -7,7 +7,7 @@ package radix
 
 import "testing"
 
-func TestConvertRadixStrToNum(t *testing.T) {
+func TestCheckRadix(t *testing.T) {
 	var testCases = []struct {
 		in       int // input
 		expected bool // expected result

@@ -22,7 +22,15 @@ const (
 	BinFormatPlaceholder = "b"
 )
 
-func ConvertRadixStrToPlaceholder(intRadix int) (placeholderStr string) {
+
+func CheckRadix(intRadix int) bool {
+	if intRadix == Hex || intRadix == Dec || intRadix == Oct || intRadix == Bin {
+		return true
+	}
+	return false
+}
+
+func ConvertRadixNumToPlaceholder(intRadix int) (placeholderStr string) {
 	switch intRadix {
 	case Hex:
 		placeholderStr = HexFormatPlaceholder
