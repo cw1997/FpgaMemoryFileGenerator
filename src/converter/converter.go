@@ -5,7 +5,6 @@
 
 package converter
 
-
 type Converter interface {
 	Convert(input interface{}) []byte
 }
