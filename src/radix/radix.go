@@ -22,18 +22,26 @@ const (
 	BinFormatPlaceholder = "b"
 )
 
-func ConvertRadixStrToPlaceholder(strRadix string) (placeholderStr string) {
-	switch strRadix {
-	case HexStr:
+
+func CheckRadix(intRadix int) bool {
+	if intRadix == Hex || intRadix == Dec || intRadix == Oct || intRadix == Bin {
+		return true
+	}
+	return false
+}
+
+func ConvertRadixNumToPlaceholder(intRadix int) (placeholderStr string) {
+	switch intRadix {
+	case Hex:
 		placeholderStr = HexFormatPlaceholder
 		break
-	case DecStr:
+	case Dec:
 		placeholderStr = DecFormatPlaceholder
 		break
-	case OctStr:
+	case Oct:
 		placeholderStr = OctFormatPlaceholder
 		break
-	case BinStr:
+	case Bin:
 		placeholderStr = BinFormatPlaceholder
 		break
 	default:
@@ -43,23 +51,23 @@ func ConvertRadixStrToPlaceholder(strRadix string) (placeholderStr string) {
 	return placeholderStr
 }
 
-func ConvertRadixStrToNum(strRadix string) (num int) {
-	switch strRadix {
-	case HexStr:
-		num = Hex
+func ConvertRadixNumToStr(intRadix int) (radixStr string) {
+	switch intRadix {
+	case Hex:
+		radixStr = HexStr
 		break
-	case DecStr:
-		num = Dec
+	case Dec:
+		radixStr = DecStr
 		break
-	case OctStr:
-		num = Oct
+	case Oct:
+		radixStr = OctStr
 		break
-	case BinStr:
-		num = Bin
+	case Bin:
+		radixStr = BinStr
 		break
 	default:
-		num = 0
+		radixStr = ""
 		break
 	}
-	return num
+	return radixStr
 }
