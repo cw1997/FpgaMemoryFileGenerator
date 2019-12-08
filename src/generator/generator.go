@@ -8,6 +8,3 @@ package generator
 type Generator interface {
 	Generate(data []byte) string
 }
-
-
-
