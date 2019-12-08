@@ -12,7 +12,7 @@ func WriteStrToFile(data string, path string) error {
 	return err
 }
 
-func ReadBytesFromFile(data string, path string) ([]byte, error) {
+func ReadBytesFromFile(path string) ([]byte, error) {
 	b, err := ioutil.ReadFile(path)
 	return b, err
 }
