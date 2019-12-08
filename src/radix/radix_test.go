@@ -41,9 +41,28 @@ func TestConvertRadixStrToPlaceholder(t *testing.T) {
 	}
 
 	for _, tt := range testCases {
-		actual := ConvertRadixStrToPlaceholder(tt.in)
+		actual := ConvertRadixNumToPlaceholder(tt.in)
 		if actual != tt.expected {
 			t.Errorf("ConvertRadixStrToNum(%v [%T]) = %v [%T]; expected %v [%T]\n", tt.in, tt.in, actual, actual, tt.expected, tt.expected)
+		}
+	}
+}
+
+func TestConvertRadixNumToStr(t *testing.T) {
+	var testCases = []struct {
+		in       int // input
+		expected string // expected result
+	}{
+		{16, "HEX"},
+		{10, "DEC"},
+		{8, "OCT"},
+		{2, "BIN"},
+	}
+
+	for _, tt := range testCases {
+		actual := ConvertRadixNumToStr(tt.in)
+		if actual != tt.expected {
+			t.Errorf("ConvertRadixNumToStr(%v [%T]) = %v [%T]; expected %v [%T]\n", tt.in, tt.in, actual, actual, tt.expected, tt.expected)
 		}
 	}
 }

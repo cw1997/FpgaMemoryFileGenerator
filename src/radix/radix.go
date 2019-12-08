@@ -43,9 +43,23 @@ func ConvertRadixStrToPlaceholder(intRadix int) (placeholderStr string) {
 	return placeholderStr
 }
 
-func CheckRadix(intRadix int) bool {
-	if intRadix == Hex || intRadix == Dec || intRadix == Oct || intRadix == Bin {
-		return true
+func ConvertRadixNumToStr(intRadix int) (radixStr string) {
+	switch intRadix {
+	case Hex:
+		radixStr = HexStr
+		break
+	case Dec:
+		radixStr = DecStr
+		break
+	case Oct:
+		radixStr = OctStr
+		break
+	case Bin:
+		radixStr = BinStr
+		break
+	default:
+		radixStr = ""
+		break
 	}
-	return false
+	return radixStr
 }
