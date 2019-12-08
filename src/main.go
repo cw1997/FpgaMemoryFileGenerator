@@ -11,6 +11,12 @@ import (
 	"os"
 	"time"
 
+	"github.com/cw1997/FpgaMemoryFileGenerator/converter/ascii"
+	"github.com/cw1997/FpgaMemoryFileGenerator/generator"
+	"github.com/cw1997/FpgaMemoryFileGenerator/generator/coe"
+	"github.com/cw1997/FpgaMemoryFileGenerator/generator/mif"
+	"github.com/cw1997/FpgaMemoryFileGenerator/utils"
+
 	"github.com/urfave/cli/v2"
 )
 
@@ -62,33 +68,33 @@ func main() {
 				DefaultText: "current path, filename: ./output",
 			},
 
-			&cli.StringFlag{
+			&cli.IntFlag{
 				Name:        "radix-address",
 				Usage:       "Radix of address (Only be used for mif format)",
 				Aliases:     []string{"ra"},
-				Value:       "16",
+				Value:       16,
 				DefaultText: "16 hex",
 			},
-			&cli.StringFlag{
+			&cli.IntFlag{
 				Name:        "depth",
 				Usage:       "Depth of memory (Only be used for mif format)",
 				Aliases:     []string{"d"},
-				Value:       "16",
+				Value:       16,
 				DefaultText: "16",
 			},
 
-			&cli.StringFlag{
+			&cli.IntFlag{
 				Name:        "width",
 				Usage:       "Bit width of memory (Only be used for mif format)",
 				Aliases:     []string{"w"},
-				Value:       "16",
+				Value:       16,
 				DefaultText: "16",
 			},
-			&cli.StringFlag{
+			&cli.IntFlag{
 				Name:        "radix-data",
 				Usage:       "Radix of input data",
 				Aliases:     []string{"rd"},
-				Value:       "Radix of data",
+				Value:       16,
 				DefaultText: "16 hex",
 			},
 
@@ -108,11 +114,55 @@ func main() {
 			},
 		},
 		Action: func(ctx *cli.Context) error {
-			//if !ctx.Bool("ginger-crouton") {
-			//	return cli.Exit("Ginger croutons are not in the soup", 86)
-			//}
-			log.Println(ctx)
-			log.Println(ctx.String("output-path"))
+			dataSource := ctx.String("data-source")
+
+			str, err := utils.ReadStringFromFile(dataSource)
+			if err != nil {
+				log.Fatalf("[Error] DataSource error, pleasc check the file path '%s'. %s.\n", dataSource, err)
+			}
+
+			var outputBytes []byte
+
+			dataType := ctx.String("data-type")
+			switch dataType {
+			case "ascii":
+				outputBytes = ascii.Converter(str)
+				break
+
+			}
+
+			var g generator.Generator
+
+			outputType := ctx.String("output-type")
+			switch outputType {
+			case "mif":
+				depth := ctx.Int("depth")
+				width := ctx.Int("width")
+				addressRadix := ctx.Int("radix-address")
+				dataRadix := ctx.Int("radix-data")
+				g = mif.NewMifGenerator(depth, width, addressRadix, dataRadix)
+				break
+
+			case "coe":
+				width := ctx.Int("width")
+				dataRadix := ctx.Int("radix-data")
+				g = coe.NewCoeGenerator(width, dataRadix)
+
+			default:
+				log.Fatalf("[Error] Unsupport output type, " +
+					"now only support Altera Memory Initialization File 'mif' and Xilinx memory content 'coe', " +
+					"pleasc check the output type.\n")
+				break
+
+			}
+
+			outputStr := g.Generate(outputBytes)
+			outputPath := ctx.String("output-path")
+			err = utils.WriteStrToFile(outputStr, outputPath)
+			if err != nil {
+				log.Fatalf("[Error] Save output result error, pleasc check the output file path '%s'.\n", outputPath)
+			}
+
 			return nil
 		},
 	}
