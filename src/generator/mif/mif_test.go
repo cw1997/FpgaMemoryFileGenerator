@@ -10,16 +10,16 @@ import "testing"
 type params struct {
 	depth int
 	width int
-	addressRadix string
-	dataRadix string
+	addressRadix int
+	dataRadix int
 	data []byte
 }
 
 type paramsNew struct {
 	depth int
 	width int
-	addressRadix string
-	dataRadix string
+	addressRadix int
+	dataRadix int
 }
 
 func TestNewMifGenerator(t *testing.T) {
@@ -28,16 +28,17 @@ func TestNewMifGenerator(t *testing.T) {
 		expected Format    // expected result
 	} {
 		//{{depth: 8, width: 8, addressRadix: "hex", dataRadix: "hex", data: data1}, "16"},
-		{
-			paramsNew{8, 8, "hex", "hex"},
-			Format{8, 8, "HEX", "HEX"}},
+		{paramsNew{8, 8, 16, 16},
+			Format{8, 8, 16, 16}},
+		{paramsNew{8, 8, 5, 16},
+			Format{8, 8, 16, 16}},
 	}
 
 
 	for _, tt := range testCases {
 		actual := NewMifGenerator(tt.in.depth, tt.in.width, tt.in.addressRadix, tt.in.dataRadix)
 		if actual.depth != tt.expected.depth || actual.width != tt.expected.width || actual.addressRadix != tt.expected.addressRadix || actual.dataRadix != tt.expected.dataRadix  {
-			t.Errorf("Generate(%v) = %v; expected %v", tt.in, actual, tt.expected)
+			t.Errorf("NewMifGenerator(%v [%T]) = %v [%T]; expected %v [%T]\n", tt.in, tt.in, actual, actual, tt.expected, tt.expected)
 		}
 	}
 }
@@ -67,7 +68,7 @@ END;
 		expected string // expected result
 	} {
 		//{{depth: 8, width: 8, addressRadix: "hex", dataRadix: "hex", data: data1}, "16"},
-		{params{8, 8, "hex", "hex", data1}, except1},
+		{params{8, 8, 16, 16, data1}, except1},
 	}
 
 

@@ -7,34 +7,38 @@ package mif
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
-
 	"github.com/cw1997/FpgaMemoryFileGenerator/radix"
+	"log"
+	"strconv"
 )
 
 type Format struct {
 	depth int
 	width int
-	addressRadix string
-	dataRadix string
+	addressRadix int
+	dataRadix int
 }
 
-func NewMifGenerator(depth int, width int, addressRadix string, dataRadix string) Format {
+func NewMifGenerator(depth int, width int, addressRadix int, dataRadix int) Format {
+	if !radix.CheckRadix(addressRadix) || !radix.CheckRadix(dataRadix) {
+		log.Fatalf("[Error] Input radix is not in [2 8 10 16]. \n")
+	}
 	return Format{depth,
 		width,
-		strings.ToUpper(addressRadix),
-		strings.ToUpper(dataRadix)}
+		addressRadix,
+		dataRadix}
 }
 
 func (m Format) Generate(data []byte) string {
 	content := ""
-	addressRadixNum := radix.ConvertRadixStrToNum(m.addressRadix)
-	addressRadixFormatPlaceholder := radix.ConvertRadixStrToPlaceholder(m.addressRadix)
+	addressRadixNum := m.addressRadix
+	addressRadixStr := radix.ConvertRadixNumToStr(m.addressRadix)
+	addressRadixFormatPlaceholder := radix.ConvertRadixNumToPlaceholder(m.addressRadix)
 	addressLength := strconv.Itoa(m.depth / addressRadixNum + 1)
 
-	dataRadixNum := radix.ConvertRadixStrToNum(m.dataRadix)
-	dataRadixFormatPlaceholder := radix.ConvertRadixStrToPlaceholder(m.dataRadix)
+	dataRadixNum := m.dataRadix
+	dataRadixStr := radix.ConvertRadixNumToStr(m.dataRadix)
+	dataRadixFormatPlaceholder := radix.ConvertRadixNumToPlaceholder(m.dataRadix)
 	dataWidth := strconv.Itoa(m.width / dataRadixNum + 1)
 
 	// example: %s%08x:%08x\n
@@ -58,6 +62,6 @@ DATA_RADIX = %s;
 CONTENT
 BEGIN
 %sEND;
-`, m.depth, m.width, m.addressRadix, m.dataRadix, content)
+`, m.depth, m.width, addressRadixStr, dataRadixStr, content)
 	return fileContent
 }
