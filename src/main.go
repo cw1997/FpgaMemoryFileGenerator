@@ -69,9 +69,9 @@ func main() {
 			},
 
 			&cli.IntFlag{
-				Name:        "radix-address",
+				Name:        "address-radix",
 				Usage:       "Radix of address (Only be used for mif format)",
-				Aliases:     []string{"ra"},
+				Aliases:     []string{"ar"},
 				Value:       16,
 				DefaultText: "16 hex",
 			},
@@ -91,9 +91,9 @@ func main() {
 				DefaultText: "16",
 			},
 			&cli.IntFlag{
-				Name:        "radix-data",
+				Name:        "data-radix",
 				Usage:       "Radix of input data",
-				Aliases:     []string{"rd"},
+				Aliases:     []string{"dr"},
 				Value:       16,
 				DefaultText: "16 hex",
 			},
@@ -138,14 +138,14 @@ func main() {
 			case "mif":
 				depth := ctx.Int("depth")
 				width := ctx.Int("width")
-				addressRadix := ctx.Int("radix-address")
-				dataRadix := ctx.Int("radix-data")
+				addressRadix := ctx.Int("address-radix")
+				dataRadix := ctx.Int("data-radix")
 				g = mif.NewMifGenerator(depth, width, addressRadix, dataRadix)
 				break
 
 			case "coe":
 				width := ctx.Int("width")
-				dataRadix := ctx.Int("radix-data")
+				dataRadix := ctx.Int("data-radix")
 				g = coe.NewCoeGenerator(width, dataRadix)
 				break
 
