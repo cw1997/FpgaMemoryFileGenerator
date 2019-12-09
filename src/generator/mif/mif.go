@@ -32,12 +32,12 @@ func NewMifGenerator(depth int, width int, addressRadix int, dataRadix int) Form
 func (m Format) Generate(data []byte) string {
 	content := ""
 	addressRadixNum := m.addressRadix
-	addressRadixStr := radix.ConvertRadixNumToStr(m.addressRadix)
+	addressRadixStr := radix.ConvertAddressRadixNumToStr(m.addressRadix)
 	addressRadixFormatPlaceholder := radix.ConvertRadixNumToPlaceholder(m.addressRadix)
 	addressLength := strconv.Itoa(m.depth/addressRadixNum + 1)
 
 	dataRadixNum := m.dataRadix
-	dataRadixStr := radix.ConvertRadixNumToStr(m.dataRadix)
+	dataRadixStr := radix.ConvertDataRadixNumToStr(m.dataRadix)
 	dataRadixFormatPlaceholder := radix.ConvertRadixNumToPlaceholder(m.dataRadix)
 	dataWidth := strconv.Itoa(m.width/dataRadixNum + 1)
 
