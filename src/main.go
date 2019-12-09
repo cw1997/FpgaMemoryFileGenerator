@@ -147,6 +147,7 @@ func main() {
 				width := ctx.Int("width")
 				dataRadix := ctx.Int("radix-data")
 				g = coe.NewCoeGenerator(width, dataRadix)
+				break
 
 			default:
 				log.Fatalf("[Error] Unsupport output type, " +
