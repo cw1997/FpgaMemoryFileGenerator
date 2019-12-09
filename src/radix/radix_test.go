@@ -19,6 +19,7 @@ func TestCheckRadix(t *testing.T) {
 		{1, false},
 		{3, false},
 		{5, false},
+		{-10, true},
 	}
 
 	for _, tt := range testCases {
@@ -35,7 +36,8 @@ func TestConvertRadixStrToPlaceholder(t *testing.T) {
 		expected string // expected result
 	}{
 		{16, "x"},
-		{10, "d"},
+		{-10, "d"},
+		{10, "u"},
 		{8, "o"},
 		{2, "b"},
 	}
@@ -54,7 +56,8 @@ func TestConvertRadixNumToStr(t *testing.T) {
 		expected string // expected result
 	}{
 		{16, "HEX"},
-		{10, "DEC"},
+		{-10, "DEC"},
+		{10, "UNS"},
 		{8, "OCT"},
 		{2, "BIN"},
 	}

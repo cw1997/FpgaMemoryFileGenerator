@@ -7,23 +7,26 @@ package radix
 
 const (
 	Hex = 16
-	Dec = 10
+	Dec = -10
+	Uns = 10
 	Oct = 8
 	Bin = 2
 
 	HexStr = "HEX"
 	DecStr = "DEC"
+	UnsStr = "UNS"
 	OctStr = "OCT"
 	BinStr = "BIN"
 
 	HexFormatPlaceholder = "x"
 	DecFormatPlaceholder = "d"
+	UnsFormatPlaceholder = "u"
 	OctFormatPlaceholder = "o"
 	BinFormatPlaceholder = "b"
 )
 
 func CheckRadix(intRadix int) bool {
-	if intRadix == Hex || intRadix == Dec || intRadix == Oct || intRadix == Bin {
+	if intRadix == Hex || intRadix == Dec || intRadix == Uns || intRadix == Oct || intRadix == Bin {
 		return true
 	}
 	return false
@@ -36,6 +39,9 @@ func ConvertRadixNumToPlaceholder(intRadix int) (placeholderStr string) {
 		break
 	case Dec:
 		placeholderStr = DecFormatPlaceholder
+		break
+	case Uns:
+		placeholderStr = UnsFormatPlaceholder
 		break
 	case Oct:
 		placeholderStr = OctFormatPlaceholder
@@ -57,6 +63,9 @@ func ConvertRadixNumToStr(intRadix int) (radixStr string) {
 		break
 	case Dec:
 		radixStr = DecStr
+		break
+	case Uns:
+		radixStr = UnsStr
 		break
 	case Oct:
 		radixStr = OctStr
