@@ -3,7 +3,7 @@
 // datetime : 2019/12/8 21:07
 // repo : https://github.com/cw1997/FpgaMemoryFileGenerator
 
-package io
+package utils
 
 import "io/ioutil"
 
@@ -12,7 +12,12 @@ func WriteStrToFile(data string, path string) error {
 	return err
 }
 
-func ReadBytesFromFile(data string, path string) ([]byte, error) {
+func ReadBytesFromFile(path string) ([]byte, error) {
 	b, err := ioutil.ReadFile(path)
 	return b, err
+}
+
+func ReadStringFromFile(path string) (string, error) {
+	b, err := ioutil.ReadFile(path)
+	return string(b), err
 }

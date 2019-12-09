@@ -13,10 +13,10 @@ import (
 )
 
 type Format struct {
-	depth int
-	width int
+	depth        int
+	width        int
 	addressRadix int
-	dataRadix int
+	dataRadix    int
 }
 
 func NewMifGenerator(depth int, width int, addressRadix int, dataRadix int) Format {
@@ -32,19 +32,17 @@ func NewMifGenerator(depth int, width int, addressRadix int, dataRadix int) Form
 func (m Format) Generate(data []byte) string {
 	content := ""
 	addressRadixNum := m.addressRadix
-	addressRadixStr := radix.ConvertRadixNumToStr(m.addressRadix)
+	addressRadixStr := radix.ConvertAddressRadixNumToStr(m.addressRadix)
 	addressRadixFormatPlaceholder := radix.ConvertRadixNumToPlaceholder(m.addressRadix)
-	addressLength := strconv.Itoa(m.depth / addressRadixNum + 1)
+	addressLength := strconv.Itoa(m.depth/addressRadixNum + 1)
 
 	dataRadixNum := m.dataRadix
-	dataRadixStr := radix.ConvertRadixNumToStr(m.dataRadix)
+	dataRadixStr := radix.ConvertDataRadixNumToStr(m.dataRadix)
 	dataRadixFormatPlaceholder := radix.ConvertRadixNumToPlaceholder(m.dataRadix)
-	dataWidth := strconv.Itoa(m.width / dataRadixNum + 1)
+	dataWidth := strconv.Itoa(m.width/dataRadixNum + 1)
 
 	// example: %s%08x:%08x\n
-	contentFormat := "%s%0" + addressLength + addressRadixFormatPlaceholder + ":%0" + dataWidth + dataRadixFormatPlaceholder + "\n"
-
-
+	contentFormat := "%s%0" + addressLength + addressRadixFormatPlaceholder + ":%0" + dataWidth + dataRadixFormatPlaceholder + ";\n"
 
 	for i := 0; i < m.depth; i++ {
 		if i >= len(data) {

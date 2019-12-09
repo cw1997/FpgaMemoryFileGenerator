@@ -7,12 +7,14 @@ package radix
 
 const (
 	Hex = 16
-	Dec = 10
+	Dec = -10
+	Uns = 10
 	Oct = 8
 	Bin = 2
 
 	HexStr = "HEX"
 	DecStr = "DEC"
+	UnsStr = "UNS"
 	OctStr = "OCT"
 	BinStr = "BIN"
 
@@ -22,9 +24,8 @@ const (
 	BinFormatPlaceholder = "b"
 )
 
-
 func CheckRadix(intRadix int) bool {
-	if intRadix == Hex || intRadix == Dec || intRadix == Oct || intRadix == Bin {
+	if intRadix == Hex || intRadix == Dec || intRadix == Uns || intRadix == Oct || intRadix == Bin {
 		return true
 	}
 	return false
@@ -35,7 +36,9 @@ func ConvertRadixNumToPlaceholder(intRadix int) (placeholderStr string) {
 	case Hex:
 		placeholderStr = HexFormatPlaceholder
 		break
-	case Dec:
+	// golang's fmt.printf() doesn't have unsigned decimal placeholder
+	// so it also uses %d instead of %u(c -> stdio.h -> printf())
+	case Dec, Uns:
 		placeholderStr = DecFormatPlaceholder
 		break
 	case Oct:
@@ -51,12 +54,37 @@ func ConvertRadixNumToPlaceholder(intRadix int) (placeholderStr string) {
 	return placeholderStr
 }
 
-func ConvertRadixNumToStr(intRadix int) (radixStr string) {
+func ConvertDataRadixNumToStr(intRadix int) (radixStr string) {
 	switch intRadix {
 	case Hex:
 		radixStr = HexStr
 		break
 	case Dec:
+		radixStr = DecStr
+		break
+	case Uns:
+		radixStr = UnsStr
+		break
+	case Oct:
+		radixStr = OctStr
+		break
+	case Bin:
+		radixStr = BinStr
+		break
+	default:
+		radixStr = ""
+		break
+	}
+	return radixStr
+}
+
+func ConvertAddressRadixNumToStr(intRadix int) (radixStr string) {
+	switch intRadix {
+	case Hex:
+		radixStr = HexStr
+		break
+	// address doesn't distinguish sign
+	case Dec, Uns:
 		radixStr = DecStr
 		break
 	case Oct:

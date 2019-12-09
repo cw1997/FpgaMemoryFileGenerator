@@ -15,7 +15,7 @@ import (
 )
 
 type Format struct {
-	width int
+	width     int
 	dataRadix int
 }
 
@@ -28,18 +28,16 @@ func NewCoeGenerator(width int, dataRadix int) Format {
 		dataRadix}
 }
 
-
 func (m Format) Generate(data []byte) string {
 	content := ""
 
 	dataRadixNum := m.dataRadix
-	//dataRadixStr := radix.ConvertRadixNumToStr(m.dataRadix)
+	//dataRadixStr := radix.ConvertDataRadixNumToStr(m.dataRadix)
 	dataRadixFormatPlaceholder := radix.ConvertRadixNumToPlaceholder(m.dataRadix)
-	dataWidth := strconv.Itoa(m.width / dataRadixNum + 1)
+	dataWidth := strconv.Itoa(m.width/dataRadixNum + 1)
 
 	// example: %s%08x:%08x\n
 	contentFormat := "%s%0" + dataWidth + dataRadixFormatPlaceholder + ",\n"
-
 
 	dataLength := len(data)
 
