@@ -37,7 +37,7 @@ func TestConvertRadixStrToPlaceholder(t *testing.T) {
 	}{
 		{16, "x"},
 		{-10, "d"},
-		{10, "u"},
+		{10, "d"},
 		{8, "o"},
 		{2, "b"},
 	}
@@ -50,7 +50,7 @@ func TestConvertRadixStrToPlaceholder(t *testing.T) {
 	}
 }
 
-func TestConvertRadixNumToStr(t *testing.T) {
+func TestConvertDataRadixNumToStr(t *testing.T) {
 	var testCases = []struct {
 		in       int    // input
 		expected string // expected result
@@ -63,9 +63,29 @@ func TestConvertRadixNumToStr(t *testing.T) {
 	}
 
 	for _, tt := range testCases {
-		actual := ConvertRadixNumToStr(tt.in)
+		actual := ConvertDataRadixNumToStr(tt.in)
 		if actual != tt.expected {
-			t.Errorf("ConvertRadixNumToStr(%v [%T]) = %v [%T]; expected %v [%T]\n", tt.in, tt.in, actual, actual, tt.expected, tt.expected)
+			t.Errorf("ConvertDataRadixNumToStr(%v [%T]) = %v [%T]; expected %v [%T]\n", tt.in, tt.in, actual, actual, tt.expected, tt.expected)
+		}
+	}
+}
+
+func TestConvertAddressRadixNumToStr(t *testing.T) {
+	var testCases = []struct {
+		in       int    // input
+		expected string // expected result
+	}{
+		{16, "HEX"},
+		{-10, "DEC"},
+		{10, "DEC"},
+		{8, "OCT"},
+		{2, "BIN"},
+	}
+
+	for _, tt := range testCases {
+		actual := ConvertAddressRadixNumToStr(tt.in)
+		if actual != tt.expected {
+			t.Errorf("ConvertDataRadixNumToStr(%v [%T]) = %v [%T]; expected %v [%T]\n", tt.in, tt.in, actual, actual, tt.expected, tt.expected)
 		}
 	}
 }
