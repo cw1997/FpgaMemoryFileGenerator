@@ -5,7 +5,10 @@
 
 package mif
 
-import "testing"
+import (
+	"bytes"
+	"testing"
+)
 
 type params struct {
 	depth        int
@@ -44,7 +47,7 @@ func TestNewMifGenerator(t *testing.T) {
 
 func TestGenerate(t *testing.T) {
 	data1 := []byte{byte(1), byte(2), byte(3), byte(4)}
-	except1 := `DEPTH = 8;
+	except1 := []byte(`DEPTH = 8;
 WIDTH = 8;
 ADDRESS_RADIX = HEX;
 DATA_RADIX = HEX;
@@ -59,11 +62,11 @@ BEGIN
 6:0;
 7:0;
 END;
-`
+`)
 
 	var testCases = []struct {
 		in       params // input
-		expected string // expected result
+		expected []byte // expected result
 	}{
 		//{{depth: 8, width: 8, addressRadix: "hex", dataRadix: "hex", data: data1}, "16"},
 		{params{8, 8, 16, 16, data1}, except1},
@@ -72,7 +75,7 @@ END;
 	for _, tt := range testCases {
 		f := NewMifGenerator(tt.in.depth, tt.in.width, tt.in.addressRadix, tt.in.dataRadix)
 		actual := f.Generate(tt.in.data)
-		if actual != tt.expected {
+		if !bytes.Equal(actual, tt.expected) {
 			t.Errorf("Generate(%v) \n ========== actual start ========== \n%v\n  ========== actual end ========== \n"+
 				"expected : \n ========== expected start ========== \n%v\n  ========== expected end ========== \n", tt.in, actual, tt.expected)
 		}

@@ -29,7 +29,7 @@ func NewMifGenerator(depth int, width int, addressRadix int, dataRadix int) Form
 		dataRadix}
 }
 
-func (m Format) Generate(data []byte) string {
+func (m Format) Generate(data []byte) []byte {
 	content := ""
 	addressRadixNum := m.addressRadix
 	addressRadixStr := radix.ConvertAddressRadixNumToStr(m.addressRadix)
@@ -61,5 +61,5 @@ CONTENT
 BEGIN
 %sEND;
 `, m.depth, m.width, addressRadixStr, dataRadixStr, content)
-	return fileContent
+	return []byte(fileContent)
 }
