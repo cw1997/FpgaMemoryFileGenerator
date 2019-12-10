@@ -159,7 +159,7 @@ func main() {
 
 			outputStr := g.Generate(outputBytes)
 			outputPath := ctx.String("output-path")
-			err = utils.WriteStrToFile(outputStr, outputPath)
+			err = utils.WriteBytesToFile(outputStr, outputPath)
 			if err != nil {
 				log.Fatalf("[Error] Save output result error, pleasc check the output file path '%s'.\n", outputPath)
 			}

@@ -7,8 +7,8 @@ package utils
 
 import "io/ioutil"
 
-func WriteStrToFile(data string, path string) error {
-	err := ioutil.WriteFile(path, []byte(data), 0777)
+func WriteBytesToFile(data []byte, path string) error {
+	err := ioutil.WriteFile(path, data, 0666)
 	return err
 }
 
