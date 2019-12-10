@@ -5,7 +5,10 @@
 
 package coe
 
-import "testing"
+import (
+	"bytes"
+	"testing"
+)
 
 type params struct {
 	width     int
@@ -38,17 +41,17 @@ func TestNewMifGenerator(t *testing.T) {
 
 func TestGenerate(t *testing.T) {
 	data1 := []byte{byte(1), byte(2), byte(3), byte(4)}
-	except1 := `memory_initialization_radix=8;
+	except1 := []byte(`memory_initialization_radix=8;
 memory_initialization_vector=
 01,
 02,
 03,
 04;
-`
+`)
 
 	var testCases = []struct {
 		in       params // input
-		expected string // expected result
+		expected []byte // expected result
 	}{
 		//{{depth: 8, width: 8, addressRadix: "hex", dataRadix: "hex", data: data1}, "16"},
 		{params{8, 8, data1}, except1},
@@ -57,7 +60,7 @@ memory_initialization_vector=
 	for _, tt := range testCases {
 		f := NewCoeGenerator(tt.in.width, tt.in.dataRadix)
 		actual := f.Generate(tt.in.data)
-		if actual != tt.expected {
+		if !bytes.Equal(actual, tt.expected) {
 			t.Errorf("Generate(%v) \n ========== actual start ========== \n%v\n  ========== actual end ========== \n"+
 				"expected : \n ========== expected start ========== \n%v\n  ========== expected end ========== \n", tt.in, actual, tt.expected)
 		}

@@ -28,7 +28,7 @@ func NewCoeGenerator(width int, dataRadix int) Format {
 		dataRadix}
 }
 
-func (m Format) Generate(data []byte) string {
+func (m Format) Generate(data []byte) []byte {
 	content := ""
 
 	dataRadixNum := m.dataRadix
@@ -52,5 +52,5 @@ func (m Format) Generate(data []byte) string {
 memory_initialization_vector=
 %s;
 `, dataRadixNum, content)
-	return fileContent
+	return []byte(fileContent)
 }
